@@ -76,6 +76,7 @@ The Fieldtrip data format seems not to allow units shared across contacts (see h
 
 ## Data format overview
 This is just a first attempt to try to make sense of the data formats in NWB and FieldTrip to see what needs to be converted into what. 
+I used the first dataset from https://figshare.com/articles/Datasets_from_Steinmetz_et_al_2019_in_NWB_format/11274968 to look at NWB. So far I only focused on spiking, not LFPs.
 
 ### NWB:
 Assume the .nwb file is called nwb, then
