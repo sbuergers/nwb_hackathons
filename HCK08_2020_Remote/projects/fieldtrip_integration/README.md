@@ -80,7 +80,7 @@ This is just a first attempt to try to make sense of the data formats in NWB and
 ### NWB:
 Assume the .nwb file is called nwb, then
 
-__nwb.general_..__ contain lots of information specific to the experiment, recording, etc., which might not be that important for us, at least at the beginning. 
+__nwb.general..__ contain lots of information specific to the experiment, recording, etc., which might not be that important for us, at least at the beginning. 
 
 __nwb.acquisition__ contains a number of constrained sets that have information on the raw data. For example raw electrophys data might be saved in ElectricalSeries objects, but behavioural and other data can be included as BehavioralTimeSeries and TimeSeries objects. I had a quick look at some examples, where the set contained an ElectricalSeries object for each trial, plus two non-electrophys TimeSeries. You can access constrained sets using the keys=nwb.acquisition.keys() like so nwb.acquisition.get(keys(1)).
 
