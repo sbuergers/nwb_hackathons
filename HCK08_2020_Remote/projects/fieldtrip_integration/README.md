@@ -54,6 +54,12 @@ https://www.biorxiv.org/content/10.1101/523035v1.full.pdf
 NWB:N 2.0 Matlab API b
 https://github.com/NeurodataWithoutBorders/matnwb
 
+NWB:N 2.0 basic data usage
+https://neurodatawithoutborders.github.io/matnwb/tutorials/html/basicUsage.html
+
+NWB:N 2.0 schema
+https://nwb-schema.readthedocs.io/en/latest/
+
 Fieldtrip datatype: Raw data
 http://www.fieldtriptoolbox.org/reference/ft_datatype_raw/
 
@@ -62,9 +68,36 @@ http://www.fieldtriptoolbox.org/reference/ft_datatype_spike/
 
 
 
-Potential issues:
+## Potential issues
 1
 The Fieldtrip data format seems not to allow units shared across contacts (see https://github.com/fieldtrip/fieldtrip/issues/721#issuecomment-603080632). It allows several units per contact (described in spike.unit which contains one integer for each channel and spike in that channel.
+
+
+
+## Data format overview
+This is just a first attempt to try to make sense of the data formats in NWB and FieldTrip to see what needs to be converted into what. 
+
+### NWB:
+Assume the .nwb file is called nwb, then
+
+__nwb.general_..__ contain lots of information specific to the experiment, recording, etc., which might not be that important for us, at least at the beginning. 
+
+__nwb.acquisition__ contains a number of constrained sets that have information on the raw data. For example raw electrophys data might be saved in ElectricalSeries objects, but behavioural and other data can be included as BehavioralTimeSeries and TimeSeries objects. I had a quick look at some examples, where the set contained an ElectricalSeries object for each trial, plus two non-electrophys TimeSeries. You can access constrained sets using the keys=nwb.acquisition.keys() like so nwb.acquisition.get(keys(1)).
+
+__nwb.intervals_trials__ contains potentially lots of trial related information that is not electrophys data, e.g. trial type, response time, etc.
+
+__nwb.units__ is probably most relevant for us. It contains the spike times in nwb.units.spike_times.data.load() for example. 
+
+__nwb.timestamps_reference_time__ is the time every other temporal information in the file is referenced against.
+
+
+
+### FieldTrip
+
+The FieldTrip data structure is comparatively simple compared to NWB, but also contains much less information. I believe that this tutorial is a great start.  
+http://www.fieldtriptoolbox.org/tutorial/spike/
+
+
 
 
 
